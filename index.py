@@ -1,13 +1,6 @@
 from enum import Enum
 
 def main():
-    print("Hello World!")
-    blackKing = Piece(Colour.BLACK, "h4", PieceType.KING)
-    blackKing.getInfo()
-    blackKnight = Piece(Colour.BLACK, "h4", PieceType.KNIGHT)
-    blackKnight.getInfo()
-    blackBishop = Piece(Colour.BLACK, "h4", PieceType.BISHOP)
-    blackBishop.getInfo()
     startGame()
 
 def startGame():
