@@ -4,38 +4,45 @@ def main():
     startGame()
 
 def startGame():
-    board, dict = generateBoard()
+    board = gameBoard()
     pass
 
 
-# Generating the game board 
-def generateBoard():
-    # Initialize an empty chess board
-    chess_board = [['' for _ in range(8)] for _ in range(8)]
+class gameBoard():
+    def __init__(self):
+         # Initialize an empty chess board
+        self.chess_board = [['' for _ in range(8)] for _ in range(8)]
 
-    # Map the notation of each square to its corresponding index in the board list
-    square_to_index = {}
-    for i in range(8):
-        for j in range(8):
-            square_to_index[chr(j+97)+str(8-i)] = (i,j)
+        # Map the notation of each square to its corresponding index in the board list
+        self.square_to_index = {}
+        for i in range(8):
+            for j in range(8):
+                self.square_to_index[chr(j+97)+str(8-i)] = (i,j)
 
-    # Place the pieces based on their notations
-    pieces = {
-        'R': ['a1', 'h1'], 'N': ['b1', 'g1'], 'B': ['c1', 'f1'], 
-        'Q': ['d1'], 'K': ['e1'], 'P': ['a2', 'b2', 'c2', 'd2', 'e2', 'f2', 'g2', 'h2'], 
-        'r': ['a8', 'h8'], 'n': ['b8', 'g8'], 'b': ['c8', 'f8'], 
-        'q': ['d8'], 'k': ['e8'], 'p': ['a7', 'b7', 'c7', 'd7', 'e7', 'f7', 'g7', 'h7']
-    }
+        pieces = generatePieces()
 
-    for piece, squares in pieces.items():
-        for square in squares:
-            i, j = square_to_index[square]
-            chess_board[i][j] = (piece, square)
+        for piece in pieces:
+            add_piece(self, piece)
+            piece.getInfo()
 
-    return chess_board, square_to_index
+        pass
+
+    pass
+
+
+def add_piece(self, piece):
+    i, j = self.square_to_index[piece.Position]
+    self.chess_board[i][j] = piece
+
+
 
 def checkAllowedMoves(Piece):
     pass
+
+class MoveList:
+    def __init__(self):
+        
+        pass
 
 class Piece:
     def __init__(self, colour, position, pieceType):
@@ -50,8 +57,45 @@ class Piece:
     def getType(self):
         return self.PieceType.name
     def getInfo(self):
-        print(str(self.Colour.name) + " " + str(self.PieceType.name) + " has a value of: " + str(self.PieceType.value))
+        print(str(self.Colour.name) + " " + str(self.PieceType.name) + " has a value of: " + str(self.PieceType.value) + " and is on: " + str(self.Position))
 
+
+def generatePieces():
+    pieces = [
+        Piece(Colour.WHITE, "e1", PieceType.KING),
+        Piece(Colour.WHITE, "d1", PieceType.QUEEN),
+        Piece(Colour.WHITE, "a1", PieceType.ROOK),
+        Piece(Colour.WHITE, "h1", PieceType.ROOK),
+        Piece(Colour.WHITE, "b1", PieceType.KNIGHT),
+        Piece(Colour.WHITE, "g1", PieceType.KNIGHT),
+        Piece(Colour.WHITE, "c1", PieceType.BISHOP),
+        Piece(Colour.WHITE, "f1", PieceType.BISHOP),
+        Piece(Colour.WHITE, "a2", PieceType.PAWN),
+        Piece(Colour.WHITE, "b2", PieceType.PAWN),
+        Piece(Colour.WHITE, "c2", PieceType.PAWN),
+        Piece(Colour.WHITE, "d2", PieceType.PAWN),
+        Piece(Colour.WHITE, "e2", PieceType.PAWN),
+        Piece(Colour.WHITE, "f2", PieceType.PAWN),
+        Piece(Colour.WHITE, "g2", PieceType.PAWN),
+        Piece(Colour.WHITE, "h2", PieceType.PAWN),
+        Piece(Colour.BLACK, "e8", PieceType.KING),
+        Piece(Colour.BLACK, "d8", PieceType.QUEEN),
+        Piece(Colour.BLACK, "a8", PieceType.ROOK),
+        Piece(Colour.BLACK, "h8", PieceType.ROOK),
+        Piece(Colour.BLACK, "b8", PieceType.KNIGHT),
+        Piece(Colour.BLACK, "g8", PieceType.KNIGHT),
+        Piece(Colour.BLACK, "c8", PieceType.BISHOP),
+        Piece(Colour.BLACK, "f8", PieceType.BISHOP),
+        Piece(Colour.BLACK, "a7", PieceType.PAWN),
+        Piece(Colour.BLACK, "b7", PieceType.PAWN),
+        Piece(Colour.BLACK, "c7", PieceType.PAWN),
+        Piece(Colour.BLACK, "d7", PieceType.PAWN),
+        Piece(Colour.BLACK, "e7", PieceType.PAWN),
+        Piece(Colour.BLACK, "f7", PieceType.PAWN),
+        Piece(Colour.BLACK, "g7", PieceType.PAWN),
+        Piece(Colour.BLACK, "h7", PieceType.PAWN)
+    ]
+    return pieces
 
 class Colour(Enum):
     WHITE = 0
