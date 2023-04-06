@@ -1,33 +1,31 @@
-from enum import Enum
+# Imports
+from aenum import Enum, NoAlias
 
-def main():
-    startGame()
-
+# Functions 
 def startGame():
     board = gameBoard()
+    current_player = Colour.WHITE
+    finished = False
+    while not finished:
+        print_board(board.chess_board)
+        makeTurn(current_player, board)
     pass
 
 
-class gameBoard():
-    def __init__(self):
-         # Initialize an empty chess board
-        self.chess_board = [['' for _ in range(8)] for _ in range(8)]
+def makeTurn(player, board):    
+    move = input("What is your move? ")
 
-        # Map the notation of each square to its corresponding index in the board list
-        self.square_to_index = {}
-        for i in range(8):
-            for j in range(8):
-                self.square_to_index[chr(j+97)+str(8-i)] = (i,j)
+    checkAllowedMoves(player, board, move)
 
-        pieces = generatePieces()
-
-        for piece in pieces:
-            add_piece(self, piece)
-            piece.getInfo()
-
-        pass
-
+    print(move)
     pass
+
+
+def print_board(board):
+    print("  " + " ".join(["{}".format(chr(i+97)) for i in range(8)]))
+    for i in range(8):
+        print("{} {}".format(8-i, " ".join([str(board[i][j]) if not board[i][j] else board[i][j].Symbol for j in range(8)])))
+    print("  " + " ".join(["{}".format(chr(i+97)) for i in range(8)]))
 
 
 def add_piece(self, piece):
@@ -35,30 +33,9 @@ def add_piece(self, piece):
     self.chess_board[i][j] = piece
 
 
+def checkAllowedMoves(player, board, move):
 
-def checkAllowedMoves(Piece):
     pass
-
-class MoveList:
-    def __init__(self):
-        
-        pass
-
-class Piece:
-    def __init__(self, colour, position, pieceType):
-        self.Colour = colour
-        self.Position = position
-        self.PieceType = pieceType
-
-    def getColour(self):
-        return self.Colour.name
-    def getPosition(self):
-        return self.Position
-    def getType(self):
-        return self.PieceType.name
-    def getInfo(self):
-        print(str(self.Colour.name) + " " + str(self.PieceType.name) + " has a value of: " + str(self.PieceType.value) + " and is on: " + str(self.Position))
-
 
 def generatePieces():
     pieces = [
@@ -97,17 +74,106 @@ def generatePieces():
     ]
     return pieces
 
+# Classes
+
+class gameBoard():
+    def __init__(self):
+         # Initialize an empty chess board
+        self.chess_board = [['' for _ in range(8)] for _ in range(8)]
+
+        # Map the notation of each square to its corresponding index in the board list
+        self.square_to_index = {}
+        for i in range(8):
+            for j in range(8):
+                self.square_to_index[chr(j+97)+str(8-i)] = (i,j)
+
+        pieces = generatePieces()
+
+        for piece in pieces:
+            add_piece(self, piece)
+
+        pass
+
+    pass
+
+class MoveList:
+    # TODO
+    def __init__(self):
+
+        pass
+class Piece:
+    def __init__(self, colour, position, pieceType):
+        self.Colour = colour
+        self.Position = position
+        self.PieceType = pieceType
+        match pieceType:
+            case PieceType.PAWN if colour == Colour.WHITE:
+                self.Symbol = "\u2659"
+                pass
+            case PieceType.BISHOP if colour == Colour.WHITE:
+                self.Symbol = "\u2657"
+                pass
+            case PieceType.KNIGHT if colour == Colour.WHITE:
+                self.Symbol = "\u2658"
+                pass
+            case PieceType.QUEEN if colour == Colour.WHITE:
+                self.Symbol = "\u2655"
+                pass
+            case PieceType.KING if colour == Colour.WHITE:
+                self.Symbol = "\u2654"
+                pass
+            case PieceType.ROOK if colour == Colour.WHITE:
+                self.Symbol = "\u2656"
+                pass
+            case PieceType.ROOK if colour == Colour.BLACK:
+                self.Symbol = "\u265C"
+                pass
+            case PieceType.PAWN if colour == Colour.BLACK:
+                self.Symbol = "\u265F"
+                pass
+            case PieceType.BISHOP if colour == Colour.BLACK:
+                self.Symbol = "\u265D"
+                pass
+            case PieceType.KNIGHT if colour == Colour.BLACK:
+                self.Symbol = "\u265E"
+                pass
+            case PieceType.QUEEN if colour == Colour.BLACK:
+                self.Symbol = "\u265B"
+                pass
+            case PieceType.KING if colour == Colour.BLACK:
+                self.Symbol = "\u265A"
+                pass
+
+    def getColour(self):
+        return self.Colour.name
+    def getPosition(self):
+        return self.Position
+    def getType(self):
+        return self.PieceType.name
+    def getSymbol(self):
+        return self.Symbol
+    def getInfo(self):
+        print(str(self.Colour.name) + " " + str(self.PieceType.name) + " has a value of: " + str(self.PieceType.value) + " and is on: " + str(self.Position))
+
 class Colour(Enum):
     WHITE = 0
     BLACK = 1
 
 class PieceType(Enum):
+
+    _settings_ = NoAlias
+
     KING = 100
     QUEEN = 9
     ROOK = 5
     BISHOP = 3
     KNIGHT = 3
     PAWN = 1
+
+# Main
+
+def main():
+    startGame()
 
 if __name__ == "__main__":
     main()
