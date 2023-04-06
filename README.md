@@ -14,3 +14,24 @@ The main goal is to learn basic python
 - [] Add promotion
 - [] Track moves
 - [] Count worth of pawns and pieces
+
+## What moves can be made?
+
+- Pawn :
+    - 1 tile forward
+    - if first move 2 forward
+    - can take piece top left or top right of it
+    - en passant
+
+- Bishop:
+    - diagonal lines until blocked
+- Knight:
+    - l shapes
+- Rook:
+    - straight lines until blocked
+    - castle
+- Queen:
+    - straight and diagonal lines until blocked
+- King:
+    - castle
+    - one square in any direction
