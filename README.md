@@ -6,14 +6,15 @@ The main goal is to learn basic python
 
 ## Requierments:
 
-- [] Generate board
-- [] Move Pieces
-- [] Check for legal moves
-- [] Check for Check/Checkmate/Draw/Stalemate
-- [] Add special Chess Moves (Castling, En Passant)
-- [] Add promotion
-- [] Track moves
-- [] Count worth of pawns and pieces
+- [X] Generate board
+- [ ] Move Pieces
+- [ ] Check for legal moves
+- [ ] Check for Check/Checkmate/Draw/Stalemate
+- [ ] Add special Chess Moves (Castling, En Passant)
+- [ ] Add promotion
+- [ ] Track moves
+- [ ] Count worth of pawns and pieces
+- [ ] Export Movelist for later review
 
 ## What moves can be made?
 
@@ -22,7 +23,7 @@ The main goal is to learn basic python
     - if first move 2 forward
     - can take piece top left or top right of it
     - en passant
-
+    - fuck pawns
 - Bishop:
     - diagonal lines until blocked
 - Knight:
